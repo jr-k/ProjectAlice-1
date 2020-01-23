@@ -13,11 +13,10 @@ class ProjectAliceObject(Logger):
 
 
 	def __repr__(self):
-		return json.dumps(self.__dict__)
-
-
-	def __str__(self):
-		return json.dumps(self.__dict__)
+		objects = self.__dict__.copy()
+		# logger is not json serialisable
+		del objects['_logger']
+		return json.dumps(objects)
 
 
 	def broadcast(self, method: str, exceptions: list = None, manager=None, propagateToSkills: bool = False, **kwargs):
