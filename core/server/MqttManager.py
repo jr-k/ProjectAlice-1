@@ -11,6 +11,7 @@ from core.ProjectAliceExceptions import AccessLevelTooLow
 from core.base.model.Intent import Intent
 from core.base.model.Manager import Manager
 from core.commons import constants
+from core.commons.model.DataclassJsonEncoder import  DataclassJsonEncoder
 from core.dialog.model.DialogSession import DialogSession
 from core.util.Decorators import deprecated
 
@@ -695,7 +696,7 @@ class MqttManager(Manager):
 
 	def publish(self, topic: str, payload: (dict, str) = None, qos: int = 0, retain: bool = False):
 		if isinstance(payload, dict):
-			payload = json.dumps(payload)
+			payload = json.dumps(payload, cls=DataclassJsonEncoder)
 
 		self._mqttClient.publish(topic, payload, qos, retain)
 
