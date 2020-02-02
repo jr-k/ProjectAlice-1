@@ -10,7 +10,6 @@ class ProjectAliceObject:
 	def __init__(self, logDepth: int = 3, *args, **kwargs):
 		self._depth = logDepth
 		self._logger = Logger(depth=self._depth)
-		super().__init__(depth=self._depth)
 
 
 	def __repr__(self):
