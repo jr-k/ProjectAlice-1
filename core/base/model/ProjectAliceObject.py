@@ -5,10 +5,11 @@ from core.commons import constants
 from core.util.model.Logger import Logger
 
 
-class ProjectAliceObject(Logger):
+class ProjectAliceObject:
 
 	def __init__(self, logDepth: int = 3, *args, **kwargs):
 		self._depth = logDepth
+		self._logger = Logger(depth=self._depth)
 		super().__init__(depth=self._depth)
 
 
@@ -60,6 +61,30 @@ class ProjectAliceObject(Logger):
 
 		for name in deadManagers:
 			del SM.SuperManager.getInstance().managers[name]
+
+
+	def logInfo(self, msg: str):
+		self._logger.logInfo(msg)
+
+
+	def logError(self, msg: str):
+		self._logger.logError(msg)
+
+
+	def logDebug(self, msg: str):
+		self._logger.logDebug(msg)
+
+
+	def logFatal(self, msg: str):
+		self._logger.logFatal(msg)
+
+
+	def logWarning(self, msg: str, printStack: bool = False):
+		self._logger.logWarning(msg, printStack)
+
+
+	def logCritical(self, msg: str):
+		self._logger.logCritical(msg)
 
 
 	def onStart(self):
